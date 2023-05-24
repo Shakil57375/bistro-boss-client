@@ -32,7 +32,7 @@ const Testimonials = () => {
                 readOnly
               />
               <img className="my-15 w-[100px] h-[100px]" src="https://i.ibb.co/gWYkpcn/image-removebg-preview-1.png" alt="" />
-                <p>{review.details}</p>
+                <p className="text-center">{review.details}</p>
                 <h3 className="text-2xl text-orange-400">{review.name}</h3>
             </div>
             

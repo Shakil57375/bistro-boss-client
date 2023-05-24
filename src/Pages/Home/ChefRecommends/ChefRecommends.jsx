@@ -20,7 +20,7 @@ const ChefRecommends = () => {
             <h2 className="text-2xl font-semibold text-center">Shoes!</h2>
             <p>If a dog chews shoes whose shoes does he choose?</p>
             <div className=" w-full mx-auto">
-              <button className="btn btn border-yellow-600 text-yellow-600 btn-outline border-0 border-b-4">Add to Cart</button>
+              <button className="btn border-yellow-600 text-yellow-600 btn-outline border-0 border-b-4">Add to Cart</button>
             </div>
           </div>
         </div>
