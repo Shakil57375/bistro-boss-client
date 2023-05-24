@@ -12,10 +12,11 @@ import { Rating } from "@smastrom/react-rating";
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("review.json")
+    fetch("http://localhost:5000/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
+  console.log(reviews);
   return (
     <div>
       <SectionTitle
