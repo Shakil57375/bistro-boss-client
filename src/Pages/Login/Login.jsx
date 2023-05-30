@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import {
@@ -8,7 +9,9 @@ import {
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import SocialLogin from "../../SocialLogin/SocialLogin";
 const Login = () => {
+  // enable the disabled button
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -22,11 +25,10 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
     signIn(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         Swal.fire({
           title: "User logged in successfully",
           showClass: {
@@ -109,9 +111,10 @@ const Login = () => {
                   className="input input-bordered"
                 />
               </div>
+              {/* TODO: make button disabled for captcha */}
               <div className="form-control mt-6">
                 <input
-                  disabled={disabled}
+                  disabled={false}
                   type="submit"
                   value="Login"
                   className="btn btn-primary"
@@ -124,6 +127,7 @@ const Login = () => {
                   Create an account
                 </Link>{" "}
               </small>
+              <SocialLogin></SocialLogin>
             </p>
             </div>
             
