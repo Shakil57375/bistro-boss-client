@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const { googleSignIn } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
   const handleGoogleSignIn = () => {
