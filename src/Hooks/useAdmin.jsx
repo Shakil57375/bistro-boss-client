@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider"
 
 const useAdmin = () =>{
     const {user} = useContext(AuthContext)
+    // const token = localStorage.getItem("access-token")
     const [axiosSecure] = useAxiosSecure()
     const {data: isAdmin, isLoading: isAdminLoading} = useQuery({
         queryKey : ["isAdmin", user?.email],
@@ -14,6 +15,19 @@ const useAdmin = () =>{
             return res.data.admin
         }
     })
+
+    // const {data : isAdmin, isLoading : isAdminLoading} = useQuery({
+    //     queryKey : ["isAdmin", user?.email],
+    //     queryFn : async () =>{
+    //         const res = await fetch(`http://localhost:5000//users/admin/${user?.email}`,{
+    //             headers : {
+    //                 authorization : `bearer ${token}`
+    //             }
+    //         })
+    //         return res.json()
+    //     }
+    // })
+
     return [isAdmin, isAdminLoading]
 }
 
