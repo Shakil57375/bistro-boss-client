@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 
-
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
