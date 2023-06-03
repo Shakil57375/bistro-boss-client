@@ -3,14 +3,16 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 
+const axiosSecure = axios.create({
+  baseURL: 'http://localhost:5000',
+});
+
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
 
   // Create a new Axios instance
-  const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000',
-  });
+ 
 
   useEffect(() => {
     // Add a request interceptor
@@ -43,7 +45,7 @@ const useAxiosSecure = () => {
         return Promise.reject(error);
       }
     );
-  }, [navigate, logOut, axiosSecure.interceptors.request, axiosSecure.interceptors.response]);
+  }, [navigate, logOut]);
 
   return [axiosSecure];
 };
