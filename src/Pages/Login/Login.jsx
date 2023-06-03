@@ -10,16 +10,19 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SocialLogin from "../../SocialLogin/SocialLogin";
+import { useRef } from "react";
 const Login = () => {
   // enable the disabled button
   const [disabled, setDisabled] = useState(true);
-  const { signIn } = useContext(AuthContext);
+  const { signIn, resetPassword } = useContext(AuthContext);
+  const emailRef = useRef();
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   let from = location.state?.from?.pathname || "/";
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
+  
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -52,6 +55,15 @@ const Login = () => {
       setDisabled(true);
     }
   };
+
+  const handleReset = () => {
+    const email = emailRef.current.value;
+    console.log(email);
+    resetPassword(email).then(() => {
+      alert("Please check your email to reset your password");
+    });
+  };
+
   return (
     <>
       <Helmet>
@@ -80,6 +92,7 @@ const Login = () => {
                   type="text"
                   placeholder="email"
                   name="email"
+                  ref={emailRef}
                   className="input input-bordered"
                 />
               </div>
@@ -93,11 +106,12 @@ const Login = () => {
                   name="password"
                   className="input input-bordered"
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
+                <button
+                  onClick={handleReset}
+                  className="text-indigo-800 text-left space-y-3"
+                >
+                  Forgot password?
+                </button>
               </div>
               <div className="form-control">
                 <label className="label">
@@ -121,16 +135,15 @@ const Login = () => {
                 />
               </div>
               <p className="text-center mb-4">
-              <small className="text-center">
-                New Here?{" "}
-                <Link className="text-blue-700" to="/register">
-                  Create an account
-                </Link>{" "}
-              </small>
-              <SocialLogin></SocialLogin>
-            </p>
+                <small className="text-center">
+                  New Here?{" "}
+                  <Link className="text-blue-700" to="/register">
+                    Create an account
+                  </Link>{" "}
+                </small>
+                <SocialLogin></SocialLogin>
+              </p>
             </div>
-            
           </form>
         </div>
       </div>

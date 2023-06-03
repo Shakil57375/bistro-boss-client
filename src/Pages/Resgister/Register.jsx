@@ -107,6 +107,7 @@ const Register = () => {
                   <span className="text-red-600">Email is required</span>
                 )}
               </div>
+              {/* TO DO Uncomment password validation */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
@@ -118,20 +119,20 @@ const Register = () => {
                     required: true,
                     minLength: 6,
                     maxLength: 20,
-                    pattern:
-                      /(?=.*[A-Z])(?=.*[a-z])(?=.*[!#$%&?"])(?=.*[0-9]){8,20}/,
+                    // pattern:
+                    //   /(?=.*[A-Z])(?=.*[a-z])(?=.*[!#$%&?"])(?=.*[0-9]){8,20}/
                   })}
                   className="input input-bordered"
                 />
-                {errors.password?.type === "required" && (
+                {/* {errors.password?.type === "required" && (
                   <p className="text-red-600">password is required</p>
-                )}
+                )} */}
                 {errors.password?.type === "minLength" && (
                   <p className="text-red-600">
                     password must be more then 6 characters
                   </p>
                 )}
-                {errors.password?.type === "maxLength" && (
+                {/* {errors.password?.type === "maxLength" && (
                   <p className="text-red-600">
                     password must be above 20 characters
                   </p>
@@ -142,7 +143,7 @@ const Register = () => {
                     special character minimum 8 character and minimum 20
                     character and a number also
                   </p>
-                )}
+                )} */}
               </div>
               <div className="form-control mt-6">
                 <input

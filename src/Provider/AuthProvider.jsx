@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -12,7 +13,7 @@ import {
 import app from "../Firebase/firebase.config";
 import axios from "axios";
 const auth = getAuth(app);
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
@@ -32,8 +33,12 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  const resetPassword = (email) =>{
+    setLoading(true)
+    return sendPasswordResetEmail(auth, email)
+  }
+
   const logOut = () => {
-    setLoading(true);
     return signOut(auth);
   };
   const updateUserProfile = (name, photo) => {
@@ -50,7 +55,6 @@ const AuthProvider = ({ children }) => {
         axios
           .post("http://localhost:5000/jwt", { email: currentUser.email })
           .then((data) => {
-            console.log(data.data.token);
             localStorage.setItem("access-token", data.data.token);
             setLoading(false);
           });
@@ -69,6 +73,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     googleSignIn,
     logOut,
+    resetPassword,
     updateUserProfile,
   };
   return (
