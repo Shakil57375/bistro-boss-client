@@ -4,11 +4,12 @@ import { useContext } from "react"
 import { AuthContext } from "../Provider/AuthProvider"
 
 const useAdmin = () =>{
-    const {user} = useContext(AuthContext)
+    const {user, loading} = useContext(AuthContext)
     // const token = localStorage.getItem("access-token")
     const [axiosSecure] = useAxiosSecure()
     const {data: isAdmin, isLoading: isAdminLoading} = useQuery({
         queryKey : ["isAdmin", user?.email],
+        enabled : !loading,
         queryFn : async () =>{
             const res = await axiosSecure.get(`/users/admin/${user?.email}`);
             // console.log("is admin response", res);
